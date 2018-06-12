@@ -73,13 +73,13 @@ INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Phone1, Phone2, E
 		  ('Blake', 'McPerson', '1930-01-01', 'F', '1234567890', '1231232134', 'Blake@Blake.Com', 'Susan McPerson', 'Mom', '1235467890',
 			'Yaboi Hospital', 'Mai Doctah', 0, 'User2', GetDate(), 'User2', GetDate());	
 
---Not at this stage yet, will be added in future iterations.
+-- Will want NDC to actually be working before I do this. 
 --INSERT INTO Prescription (PatientId, Barcode, Color, Dosage, Identifier, Shape, DoctorNote, Warning, OriginalNumberOfDoses, CurrentNumberOfDoses,
 --						  OriginalNumberOfRefills, CurrentNumberOfRefills, IsActive, EnteredBy, EnteredDate, ModifiedBy, ModifiedDate)
 --	VALUES(100000, '1234567890', 'Blue', '2mg 3 times a day', 'MK123 Imprint', 'Round', 'Take with food', '', 23, 23, 1, 1, 1, 'User1', GetDate(), 'User1', GetDate() ),
 --		  (100000, '938457', 'Yellow', '3 milliliter each time', 'Liquid, XYZ bottle', 'Liquid', '', 'Will cause drowsiness, dont operate heavy machines', 15, 15, 0, 0, 1, 'User1', GetDate(), 'User1', GetDate() ),
---		  (100003, '654721657', 'Green', '10mg pill twice daily', 'Line on back, 123 on front', 'Oblong', '', '', 23, 23, 1, 1, 1, 'User1', GetDate(), 'User1', GetDate() ),
---		  (100006, '1234567890', 'Blue', '2mg 3 times a day', 'MK123 Imprint', 'Round', 'Take with food', '', 23, 23, 1, 1, 1, 'User1', GetDate(), 'User1', GetDate() )  	
+--		  (100000, '654721657', 'Green', '10mg pill twice daily', 'Line on back, 123 on front', 'Oblong', '', '', 23, 23, 1, 1, 1, 'User1', GetDate(), 'User1', GetDate() ),
+--		  (100003, '1234567890', 'Blue', '2mg 3 times a day', 'MK123 Imprint', 'Round', 'Take with food', '', 23, 23, 1, 1, 1, 'User1', GetDate(), 'User1', GetDate() )  	
 
 
 select * from dbo.Patient;
