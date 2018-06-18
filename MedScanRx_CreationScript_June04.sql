@@ -60,7 +60,7 @@ CREATE TABLE PrescriptionAlert (
 	PrescriptionId INT FOREIGN KEY REFERENCES Prescription(PrescriptionId),
 	AlertDateTime DATETIME2 NOT NULL,
 	TakenDateTime DATETIME2 NULL,
-	WasTaken BIT NULL,
+	IsActive BIT NOT NULL,
 )
 
 --Mock/Test Data
