@@ -2,12 +2,9 @@ USE MedScanRx
 GO
 
 --Cleanup before rerunning the script
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'PrescriptionAlert' AND TABLE_SCHEMA = 'dbo')
-	DROP TABLE dbo.PrescriptionAlert
-	IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Prescription' AND TABLE_SCHEMA = 'dbo')
-	DROP TABLE dbo.Prescription
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Patient' AND TABLE_SCHEMA = 'dbo')
-	DROP TABLE dbo.Patient;
+DROP TABLE IF EXISTS dbo.PrescriptionAlert;
+DROP TABLE IF EXISTS dbo.Prescription;
+DROP TABLE IF EXISTS dbo.Patient;
 
 --Table Creation
 CREATE TABLE Patient (
@@ -16,12 +13,12 @@ CREATE TABLE Patient (
 	LastName NVARCHAR(50) NOT NULL,
 	DateOfBirth Date NOT NULL,
 	Gender VARCHAR(1) NOT NULL,
-	Phone1 NVARCHAR(10) NOT NULL,
-	Phone2 NVARCHAR(10) NULL,
+	Phone1 NVARCHAR(12) NOT NULL,
+	Phone2 NVARCHAR(12) NULL,
 	Email NVARCHAR(100) NOT NULL,
 	EmergencyContactName NVARCHAR(100) NULL,
 	EmergencyContactRelation NVARCHAR(25) NULL,
-	EmergencyContactPhone NVARCHAR(10) NULL,
+	EmergencyContactPhone NVARCHAR(12) NULL,
 	PreferredHospital NVARCHAR(50) NULL,
 	PreferredPhysician NVARCHAR(100) NULL,
 	IsActive BIT NOT NULL,
@@ -82,4 +79,4 @@ INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Phone1, Phone2, E
 --		  (100003, '1234567890', 'Blue', '2mg 3 times a day', 'MK123 Imprint', 'Round', 'Take with food', '', 23, 23, 1, 1, 1, 'User1', GetDate(), 'User1', GetDate() )  	
 
 
-select * from dbo.Patient;
+ 
