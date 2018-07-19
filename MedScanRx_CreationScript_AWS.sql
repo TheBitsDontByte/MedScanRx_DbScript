@@ -1,4 +1,4 @@
-USE MedScanRx
+USE MedScanRx_Develop
 GO
 
 --Cleanup before rerunning the script
