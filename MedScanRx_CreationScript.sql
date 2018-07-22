@@ -1,4 +1,4 @@
-USE MedScanRx
+USE MedScanRx_Develop --MedScanRx for local
 GO
 
 --Cleanup before rerunning the script
@@ -25,15 +25,12 @@ CREATE TABLE Patient (
 	EnteredBy NVARCHAR(50) NOT NULL,
 	EnteredDate DATETIME2 NOT NULL,
 	ModifiedBy NVARCHAR(50) NOT NULL,
-	ModifiedDate DATETIME2 NOT NULL
+	ModifiedDate DATETIME2 NOT NULL 
 );
 
 CREATE TABLE Prescription (
 	PrescriptionId INT IDENTITY(1, 1) PRIMARY KEY,
 	Ndc NVARCHAR(20) NOT NULL,
-	BrandName NVARCHAR(255) NOT NULL,
-	GenericName NVARCHAR(255) NOT NULL,
-	RximageMedicineName NVARCHAR(255) NULL,
 	PrescriptionName NVARCHAR(255) NOT NULL,
 	PatientId INT FOREIGN KEY REFERENCES Patient(PatientId),
 	Color NVARCHAR(50) NOT NULL,
@@ -66,11 +63,11 @@ CREATE TABLE PrescriptionAlert (
 --Mock/Test Data
 INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Phone1, Phone2, Email, EmergencyContactName, EmergencyContactRelation, EmergencyContactPhone, 
 					 PreferredHospital, PreferredPhysician, IsActive, EnteredBy, EnteredDate, ModifiedBy, ModifiedDate) 
-	VALUES('Chris', 'Andrews', '1983-05-31', 'M', '1234567890', '1231232134', 'Chris@Chris.Com', 'Susan Andrews', 'Mom', '1235467890',
+	VALUES('Chris', 'Andrews', '1983-05-31', 'M', '123-456-7890', '123-123-2134', 'Chris@Chris.Com', 'Susan Andrews', 'Mom', '123-123-2134',
 			'Hospital 1', 'Dr. John', 1, 'User1', GetDate(), 'User1', GetDate()), 
-		  ('John', 'Smith', '1995-12-21', 'M', '1234567890', '1231232134', 'John@John.Com', 'Jill Smith', 'Mom', '1235467890',
+		  ('John', 'Smith', '1995-12-21', 'M', '123-123-2134', '123-123-2134', 'John@John.Com', 'Jill Smith', 'Mom', '123-123-2134',
 			'Hospital 2', 'Dr. Miller', 1, 'User1', GetDate(), 'User1', GetDate()), 	
-		  ('Blake', 'McPearson', '1930-01-01', 'F', '1234567890', '1231232134', 'Blake@Blake.Com', 'Andrew McPearson', 'Brother', '1235467890',
+		  ('Blake', 'McPearson', '1930-01-01', 'F', '123-123-2134', '123-123-2134', 'Blake@Blake.Com', 'Andrew McPearson', 'Brother', '123-123-2134',
 			NULL, NULL, 0, 'User2', GetDate(), 'User2', GetDate());	
 
 -- Will want NDC to actually be working before I do this. 
