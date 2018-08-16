@@ -2,6 +2,8 @@ USE MedScanRx_Develop --MedScanRx for local
 GO
 
 --Cleanup before rerunning the script
+DROP TABLE IF EXISTS dbo.PatientAccount;
+DROP TABLE IF EXISTS dbo.AdminAccount
 DROP TABLE IF EXISTS dbo.PrescriptionAlert;
 DROP TABLE IF EXISTS dbo.Prescription;
 DROP TABLE IF EXISTS dbo.Patient;
@@ -27,6 +29,22 @@ CREATE TABLE Patient (
 	ModifiedBy NVARCHAR(50) NOT NULL,
 	ModifiedDate DATETIME2 NOT NULL 
 );
+
+CREATE TABLE PatientAccount (
+	PatientId INT PRIMARY KEY FOREIGN KEY REFERENCES Patient (PatientId) ,
+	UserName  NVARCHAR(100) UNIQUE NOT NULL,
+	PW NVARCHAR(500) NOT NULL,
+	Salt NVARCHAR(500) NULL,
+)
+
+CREATE TABLE AdminAccount (
+	AdminId INT IDENTITY(1, 1) PRIMARY KEY,
+	UserName NVARCHAR(50) UNIQUE NOT NULL,
+	PW NVARCHAR(500) NOT NULL,
+	Salt NVARCHAR(500) NULL,
+	CreatedDate DateTime2(0) NOT NULL,
+	CreatedBy NVARCHAR(50) NOT NULL
+)
 
 CREATE TABLE Prescription (
 	PrescriptionId INT IDENTITY(1, 1) PRIMARY KEY,
@@ -60,6 +78,8 @@ CREATE TABLE PrescriptionAlert (
 	IsActive BIT NOT NULL,
 )
 
+
+
 --Mock/Test Data
 INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Phone1, Phone2, Email, EmergencyContactName, EmergencyContactRelation, EmergencyContactPhone, 
 					 PreferredHospital, PreferredPhysician, IsActive, EnteredBy, EnteredDate, ModifiedBy, ModifiedDate) 
@@ -69,6 +89,9 @@ INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Phone1, Phone2, E
 			'Hospital 2', 'Dr. Miller', 1, 'User1', GetDate(), 'User1', GetDate()), 	
 		  ('Blake', 'McPearson', '1930-01-01', 'F', '123-123-2134', '123-123-2134', 'Blake@Blake.Com', 'Andrew McPearson', 'Brother', '123-123-2134',
 			NULL, NULL, 0, 'User2', GetDate(), 'User2', GetDate());	
+
+INSERT INTO AdminAccount (UserName, PW, Salt, CreatedDate, CreatedBy) 
+	VALUES ('MedScanRxAdmin', 'newpasswordwhothis', 'some salt I dont konw ?', GETUTCDATE(), 'Admin DB Script')
 
 -- Will want NDC to actually be working before I do this. 
 --INSERT INTO Prescription (PatientId, Barcode, Color, Dosage, Identifier, Shape, DoctorNote, Warning, OriginalNumberOfDoses, CurrentNumberOfDoses,

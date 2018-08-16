@@ -1,6 +1,5 @@
 
-
-CREATE PROCEDURE Sp_setmissedalertsinactivehourly 
+CREATE PROCEDURE sp_deactivate_past_alerts
 AS 
   BEGIN 
       UPDATE prescriptionalert 
