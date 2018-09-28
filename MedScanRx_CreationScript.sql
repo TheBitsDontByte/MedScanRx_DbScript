@@ -33,6 +33,7 @@ CREATE TABLE Patient (
 CREATE TABLE PatientAccount (
 	PatientId INT PRIMARY KEY FOREIGN KEY REFERENCES Patient (PatientId) ,
 	UserName  NVARCHAR(100) UNIQUE NOT NULL,
+	FcmToken NVARCHAR(200) NULL,
 	PW NVARCHAR(500) NOT NULL,
 	Salt NVARCHAR(500) NULL,
 )
@@ -81,17 +82,18 @@ CREATE TABLE PrescriptionAlert (
 
 
 --Mock/Test Data
-INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Phone1, Phone2, Email, EmergencyContactName, EmergencyContactRelation, EmergencyContactPhone, 
-					 PreferredHospital, PreferredPhysician, IsActive, EnteredBy, EnteredDate, ModifiedBy, ModifiedDate) 
-	VALUES('Chris', 'Andrews', '1983-05-31', 'M', '123-456-7890', '123-123-2134', 'Chris@Chris.Com', 'Susan Andrews', 'Mom', '123-123-2134',
-			'Hospital 1', 'Dr. John', 1, 'User1', GetDate(), 'User1', GetDate()), 
-		  ('John', 'Smith', '1995-12-21', 'M', '123-123-2134', '123-123-2134', 'John@John.Com', 'Jill Smith', 'Mom', '123-123-2134',
-			'Hospital 2', 'Dr. Miller', 1, 'User1', GetDate(), 'User1', GetDate()), 	
-		  ('Blake', 'McPearson', '1930-01-01', 'F', '123-123-2134', '123-123-2134', 'Blake@Blake.Com', 'Andrew McPearson', 'Brother', '123-123-2134',
-			NULL, NULL, 0, 'User2', GetDate(), 'User2', GetDate());	
+--INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Phone1, Phone2, Email, EmergencyContactName, EmergencyContactRelation, EmergencyContactPhone, 
+--					 PreferredHospital, PreferredPhysician, IsActive, EnteredBy, EnteredDate, ModifiedBy, ModifiedDate) 
+--	VALUES('Chris', 'Andrews', '1983-05-31', 'M', '123-456-7890', '123-123-2134', 'Chris@Chris.Com', 'Susan Andrews', 'Mom', '123-123-2134',
+--			'Hospital 1', 'Dr. John', 1, 'User1', GetDate(), 'User1', GetDate()), 
+--		  ('John', 'Smith', '1995-12-21', 'M', '123-123-2134', '123-123-2134', 'John@John.Com', 'Jill Smith', 'Mom', '123-123-2134',
+--			'Hospital 2', 'Dr. Miller', 1, 'User1', GetDate(), 'User1', GetDate()), 	
+--		  ('Blake', 'McPearson', '1930-01-01', 'F', '123-123-2134', '123-123-2134', 'Blake@Blake.Com', 'Andrew McPearson', 'Brother', '123-123-2134',
+--			NULL, NULL, 0, 'User2', GetDate(), 'User2', GetDate());	
 
 INSERT INTO AdminAccount (UserName, PW, Salt, CreatedDate, CreatedBy) 
-	VALUES ('MedScanRxAdmin', 'newpasswordwhothis', 'some salt I dont konw ?', GETUTCDATE(), 'Admin DB Script')
+	VALUES ('MedScanRxAdmin', 'newpasswordwhothis', 'some salt I dont konw ?', GETUTCDATE(), 'Admin DB Script'),
+		   ('asdf', 'asdf', 'some salt I dont konw ?', GETUTCDATE(), 'Admin DB Script')
 
 -- Will want NDC to actually be working before I do this. 
 --INSERT INTO Prescription (PatientId, Barcode, Color, Dosage, Identifier, Shape, DoctorNote, Warning, OriginalNumberOfDoses, CurrentNumberOfDoses,
